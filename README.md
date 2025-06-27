@@ -19,7 +19,7 @@
   </a>
 </p>
 
-> **A robust, zero–dependency Bash script** to **automatically clean** your Docker host by removing stopped containers, dangling images, unused volumes, and orphan networks—keeping your environment lean and performant.
+> A zero-dependency Bash script to automatically clean stopped containers, dangling images, unused volumes, and orphan networks—keeping your Docker host lean and performant.
 
 ---
 
@@ -30,34 +30,29 @@
 - [🛠️ Installation](#🛠️-installation)  
 - [▶️ Usage](#▶️-usage)  
 - [📂 Directory Structure](#📂-directory-structure)  
-- [📜 Configuration & Scheduling](#📜-configuration--scheduling)  
+- [⏰ Scheduling](#⏰-scheduling)  
 - [🔍 How It Works](#🔍-how-it-works)  
 - [🤝 Contributing](#🤝-contributing)  
 - [📄 License](#📄-license)  
-- [✍️ Author](#✍️-author)
+- [✍️ Author](#✍️-author)  
 
 ---
 
 ## ✨ Features
 
-- ✅ **Zero Dependencies** – Pure Bash + Docker CLI.  
-- 🔒 **Safe & Idempotent** – Checks for resources before removal.  
-- 📣 **Verbose Logging** – Clear feedback on what was cleaned.  
-- ⏰ **Cron-Friendly** – Designed for unattended scheduled runs.  
+- ✅ **Zero Dependencies** – Pure Bash + Docker CLI  
+- 🔒 **Safe & Idempotent** – Checks before removing  
+- 📣 **Verbose Logging** – Shows exactly what’s cleaned  
+- ⏰ **Cron-Friendly** – Designed for scheduled runs  
 
 ---
 
 ## 🚀 Quickstart
 
 ```bash
-# 1. Clone the repository
 git clone https://github.com/arshad-rahman/docker-cleanup-script.git
 cd docker-cleanup-script
-
-# 2. Make the script executable
 chmod +x docker-cleanup.sh
-
-# 3. Run the cleanup
 ./docker-cleanup.sh
 ````
 
@@ -65,11 +60,11 @@ chmod +x docker-cleanup.sh
 
 ## 🛠️ Installation
 
-*No installation of dependencies required!*
-Ensure you have:
+*No extra dependencies needed!*
+Just ensure you have:
 
-* **Docker CLI** installed and running
-* **Bash** (version ≥ 4)
+* **Docker CLI** installed
+* **Bash** (v4+)
 
 ---
 
@@ -79,10 +74,10 @@ Ensure you have:
 ./docker-cleanup.sh [--dry-run] [--quiet]
 ```
 
-| Flag        | Description                                   |
-| ----------- | --------------------------------------------- |
-| `--dry-run` | Show what *would* be removed without deleting |
-| `--quiet`   | Suppress informational output (errors only)   |
+| Flag        | Description                                  |
+| ----------- | -------------------------------------------- |
+| `--dry-run` | Show what **would** be removed (no deletion) |
+| `--quiet`   | Suppress info messages (errors only)         |
 
 ---
 
@@ -90,20 +85,19 @@ Ensure you have:
 
 ```text
 docker-cleanup-script/
-├── docker-cleanup.sh     # Main cleanup script
-├── ci.yml                # (Optional) GitHub Actions workflow
-├── LICENSE               # MIT License
-└── README.md             # This document
+├── docker-cleanup.sh   # Main cleanup script
+├── ci.yml              # (Optional) GitHub Actions workflow
+├── LICENSE             # MIT License
+└── README.md           # This document
 ```
 
 ---
 
-## 📜 Configuration & Scheduling
+## ⏰ Scheduling
 
-To automate daily cleanup at 2 AM, add to your crontab:
+Add to your crontab for daily cleanup at 2 AM:
 
 ```cron
-# m h  dom mon dow   command
 0 2 * * * /path/to/docker-cleanup-script/docker-cleanup.sh >> /var/log/docker-cleanup.log 2>&1
 ```
 
@@ -113,55 +107,42 @@ To automate daily cleanup at 2 AM, add to your crontab:
 
 1. **Stopped Containers**
 
-   * Lists via `docker ps -aq --filter "status=exited"`.
-   * Removes all matches with `docker rm`.
-
+   * `docker ps -aq --filter "status=exited"` → `docker rm`
 2. **Dangling Images**
 
-   * Finds via `docker images -f "dangling=true" -q`.
-   * Cleans up using `docker rmi`.
-
+   * `docker images -f "dangling=true" -q` → `docker rmi`
 3. **Unused Volumes**
 
-   * Detects via `docker volume ls -qf "dangling=true"`.
-   * Deletes via `docker volume rm`.
-
+   * `docker volume ls -qf "dangling=true"` → `docker volume rm`
 4. **Orphan Networks**
 
-   * Prunes with `docker network prune -f`.
-
-All operations are guarded by checks to avoid errors in an already-clean environment.
+   * `docker network prune -f`
 
 ---
 
 ## 🤝 Contributing
 
-We welcome contributions! Please:
-
-1. **Fork** the repo
-2. **Branch**: `git checkout -b feature/awesome-stuff`
-3. **Commit**: `git commit -m 'Add awesome feature'`
-4. **Push**: `git push origin feature/awesome-stuff`
-5. **Open** a Pull Request
-
-Please adhere to the existing style and include tests or examples if applicable.
+1. Fork the repo
+2. Create a branch: `git checkout -b feature/YourFeature`
+3. Commit: `git commit -m "Add feature"`
+4. Push: `git push origin feature/YourFeature`
+5. Open a Pull Request
 
 ---
 
 ## 📄 License
 
-Distributed under the **MIT License**. See [LICENSE](LICENSE) for details.
+This project is licensed under the MIT License. See [LICENSE](LICENSE).
 
 ---
 
 ## ✍️ Author
 
-**Arshad** – [@arshad-rahman-mp](https://github.com/arshad-rahman) <br>
-Feel free to connect on [LinkedIn](https://www.linkedin.com/in/arshad-rahman-mp).
+**Arshad Rahman**
+
+* GitHub: [@arshad-rahman](https://github.com/arshad-rahman)
+* LinkedIn: [arshad-rahman-mp](https://www.linkedin.com/in/arshad-rahman-mp)
 
 ---
 
-<p align="center">
-  Made with ❤️ and 🐳
-</p>
-
+<p align="center">Made with ❤️ and 🐳</p>
