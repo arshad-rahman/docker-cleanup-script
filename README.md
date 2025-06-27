@@ -25,16 +25,16 @@
 
 ## 📋 Table of Contents
 
-- [✨ Features](#✨-features)  
-- [🚀 Quickstart](#🚀-quickstart)  
-- [🛠️ Installation](#🛠️-installation)  
-- [▶️ Usage](#▶️-usage)  
-- [📂 Directory Structure](#📂-directory-structure)  
-- [⏰ Scheduling](#⏰-scheduling)  
-- [🔍 How It Works](#🔍-how-it-works)  
-- [🤝 Contributing](#🤝-contributing)  
-- [📄 License](#📄-license)  
-- [✍️ Author](#✍️-author)  
+- [✨ Features](#features)  
+- [🚀 Quickstart](#quickstart)  
+- [🛠️ Installation](#installation)  
+- [▶️ Usage](#usage)  
+- [📂 Directory Structure](#directory-structure)  
+- [⏰ Scheduling](#scheduling)  
+- [🔍 How It Works](#how-it-works)  
+- [🤝 Contributing](#contributing)  
+- [📄 License](#license)  
+- [✍️ Author](#author)  
 
 ---
 
@@ -43,16 +43,21 @@
 - ✅ **Zero Dependencies** – Pure Bash + Docker CLI  
 - 🔒 **Safe & Idempotent** – Checks before removing  
 - 📣 **Verbose Logging** – Shows exactly what’s cleaned  
-- ⏰ **Cron-Friendly** – Designed for scheduled runs  
+- ⏰ **Cron-Friendly** – Designed for automated runs  
 
 ---
 
 ## 🚀 Quickstart
 
 ```bash
+# 1. Clone the repo
 git clone https://github.com/arshad-rahman/docker-cleanup-script.git
 cd docker-cleanup-script
+
+# 2. Make it executable
 chmod +x docker-cleanup.sh
+
+# 3. Run the cleanup
 ./docker-cleanup.sh
 ````
 
@@ -60,11 +65,11 @@ chmod +x docker-cleanup.sh
 
 ## 🛠️ Installation
 
-*No extra dependencies needed!*
-Just ensure you have:
+*No extra dependencies required!*
+Just ensure:
 
-* **Docker CLI** installed
-* **Bash** (v4+)
+* **Docker CLI** is installed and running
+* **Bash** (version ≥ 4)
 
 ---
 
@@ -74,10 +79,10 @@ Just ensure you have:
 ./docker-cleanup.sh [--dry-run] [--quiet]
 ```
 
-| Flag        | Description                                  |
-| ----------- | -------------------------------------------- |
-| `--dry-run` | Show what **would** be removed (no deletion) |
-| `--quiet`   | Suppress info messages (errors only)         |
+| Flag        | Description                                 |
+| ----------- | ------------------------------------------- |
+| `--dry-run` | Show what *would* be removed (no deletion)  |
+| `--quiet`   | Suppress informational output (errors only) |
 
 ---
 
@@ -86,7 +91,6 @@ Just ensure you have:
 ```text
 docker-cleanup-script/
 ├── docker-cleanup.sh   # Main cleanup script
-├── ci.yml              # (Optional) GitHub Actions workflow
 ├── LICENSE             # MIT License
 └── README.md           # This document
 ```
@@ -95,11 +99,16 @@ docker-cleanup-script/
 
 ## ⏰ Scheduling
 
-Add to your crontab for daily cleanup at 2 AM:
+1. Open your crontab editor:
 
-```cron
-0 2 * * * /path/to/docker-cleanup-script/docker-cleanup.sh >> /var/log/docker-cleanup.log 2>&1
-```
+   ```bash
+   crontab -e
+   ```
+2. Add the following line to run daily at 2 AM:
+
+   ```cron
+   0 2 * * * /path/to/docker-cleanup-script/docker-cleanup.sh >> /var/log/docker-cleanup.log 2>&1
+   ```
 
 ---
 
@@ -108,31 +117,48 @@ Add to your crontab for daily cleanup at 2 AM:
 1. **Stopped Containers**
 
    * `docker ps -aq --filter "status=exited"` → `docker rm`
+
 2. **Dangling Images**
 
    * `docker images -f "dangling=true" -q` → `docker rmi`
+
 3. **Unused Volumes**
 
    * `docker volume ls -qf "dangling=true"` → `docker volume rm`
+
 4. **Orphan Networks**
 
    * `docker network prune -f`
+
+Each step first checks for targets before attempting removal.
 
 ---
 
 ## 🤝 Contributing
 
 1. Fork the repo
-2. Create a branch: `git checkout -b feature/YourFeature`
-3. Commit: `git commit -m "Add feature"`
-4. Push: `git push origin feature/YourFeature`
+2. Create a branch:
+
+   ```bash
+   git checkout -b feature/YourFeature
+   ```
+3. Commit your changes:
+
+   ```bash
+   git commit -m "Add awesome feature"
+   ```
+4. Push to your branch:
+
+   ```bash
+   git push origin feature/YourFeature
+   ```
 5. Open a Pull Request
 
 ---
 
 ## 📄 License
 
-This project is licensed under the MIT License. See [LICENSE](LICENSE).
+Distributed under the **MIT License**. See [LICENSE](LICENSE).
 
 ---
 
