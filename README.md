@@ -25,16 +25,16 @@
 
 ## 📋 Table of Contents
 
-- [✨ Features](#features)
-- [🚀 Quickstart](#quickstart)
-- [🛠️ Installation](#installation)
-- [▶️ Usage](#usage)
-- [📂 Directory Structure](#directory-structure)
-- [⏰ Scheduling](#scheduling)
-- [🔍 How It Works](#how-it-works)
-- [🤝 Contributing](#contributing)
-- [📄 License](#license)
-- [✍️ Author](#author)
+- [✨ Features](#-features)
+- [🚀 Quickstart](#-quickstart)
+- [🛠️ Installation](#-installation)
+- [▶️ Usage](#-usage)
+- [📂 Directory Structure](#-directory-structure)
+- [⏰ Scheduling](#-scheduling)
+- [🔍 How It Works](#-how-it-works)
+- [🤝 Contributing](#-contributing)
+- [📄 License](#-license)
+- [✍️ Author](#-author)
 
 ---
 
