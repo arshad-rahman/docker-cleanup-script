@@ -33,7 +33,6 @@
 - [⏰ Scheduling](#-scheduling)
 - [🔍 How It Works](#-how-it-works)
 - [🤝 Contributing](#-contributing)
-- [📄 License](#-license)
 - [✍️ Author](#-author)
 
 ---
@@ -154,13 +153,7 @@ Each step first checks for targets before attempting removal.
    ```
 5. Open a Pull Request
 
----
-
-## 📄 License
-
-Distributed under the **MIT License**. See [LICENSE](LICENSE).
-
----
+--
 
 ## ✍️ Author
 
